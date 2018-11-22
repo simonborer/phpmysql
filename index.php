@@ -40,6 +40,8 @@
                 } else {
                     echo "<p class='lead'><em>No records were found.</em></p>";
                 }
+            } else if (mysqli_query()) {
+               echo "I guess something went right?";
 
             } else{
                 echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
