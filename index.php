@@ -11,7 +11,6 @@
         <div class="cell large-6 large-offset-3 medium-10 medium-offset-1">
 
             <?php
-            // Include config file
             require_once "config.php";
 
             require_once "query.php";
@@ -35,22 +34,18 @@
                     }
 
                     echo "</tbody></table>";
-                    // Free result set
                     mysqli_free_result($result);
                 } else {
                     echo "<p class='lead'><em>No records were found.</em></p>";
                 }
-            } else if (mysqli_query()) {
-               echo "I guess something went right?";
-
-            } else{
+            } else {
                 echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
             }
             
-            // Close connection
             mysqli_close($link);
             ?>
             
+            <div class="callout"><a href="create.php" class="button primary">Create shift</a></div>
         </div>
     </div>
 </body>
