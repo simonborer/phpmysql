@@ -23,6 +23,7 @@
                     <thead>
                         <tr>
                             <th colspan="6">Schedule</th>
+                            <img src="images/bakery.png"  id=bakeryImage alt="icon of a bread loaf">
                         </tr>
                         <!-- Column headings -->
 
