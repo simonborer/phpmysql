@@ -48,5 +48,24 @@
 
 new Tablesort(document.getElementById('scheduleTable'));
 </script>
+<script>
+var dbackground = document.querySelector(".dark-background");
+var btn = document.querySelector(".createshift");
+
+function togglePopup (){
+  dbackground.classList.toggle("show-popup")
+}
+
+function windowOnClick(event){
+  if (event.target === dbackground){
+    togglePopup();
+  }
+}
+
+btn.addEventListener("click", togglePopup);
+window.addEventListener("click", windowOnClick);
+
+</script>
+
 </body>
 </html>

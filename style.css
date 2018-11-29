@@ -66,20 +66,75 @@ th[role=columnheader]:not(.no-sort):hover:after {
 }
 
 /*  Trumps  */
-
+.schedule-form{
+  background-color: #B5D3E7;
+  height:350px;
+  overflow:scroll;
+}
 .schedule-form label>input {
     display: block;
     margin-bottom: 1rem;
     padding: .5rem;
     width: 100%;
+
 }
 
 .schedule-table {
     margin: 2rem 0;
+
 }
 
 @media (min-width: 1080px) {
     .schedule-table {
         margin: 0;
     }
+}
+
+/*Form Pop-up - This is the bulk of what I did, creating a pop-up for the shift form*/
+
+.createshift{
+  margin-top:10px;
+  margin-left:50%;
+  padding:15px;
+  color:darkgreen;
+  background-color:#bed48c;
+}
+
+.createshift:hover{
+  color:#bed48c;
+  background-color:darkgreen;
+
+}
+
+.dark-background{
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background-color: rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s
+}
+
+.popup-content{
+
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  background-color:white;
+  padding:10px 15px;
+  width:500px;
+  border-radius:0.5rem;
+  height: 375px;
+}
+
+.show-popup{
+  opacity:1;
+  visibility: visible;
+  transform: scale(1.0);
+  transition: visibility 0s linear 0s,opacity 0.25s transform0.25s;
 }
