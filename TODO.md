@@ -5,7 +5,7 @@
 	- Currently no enforcement of shift length standards (by day or week)
 - Error handling - sketchy at best!
 
-#Features
+# Features
 - Additional pages
 	- It would be nice to see a 'menu' for the bakery
 	- Archive of transactions
