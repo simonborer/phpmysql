@@ -16,8 +16,7 @@
         <!--   Title    -->
         <div class="grid-x">
             <div class="cell small-12"><h1 class="h1 text-center">Schedule</h1></div>
-        </div>
-        <div class="grid-x">
+        </div>        <div class="grid-x">
             <div class="cell large-8 large-offset-0 medium-10 medium-offset-1">
                 <table class="schedule-table" id="scheduleTable">
                     <thead>
