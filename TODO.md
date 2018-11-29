@@ -1,6 +1,9 @@
 # Bugs/Missing requirements
 - Validation
 	- Currently no server-side validation
+	- Database validation
+		- include in pull request as a .sql file
+		- Triggers, stored procedures, or annotated ER diagrams
 	- min/max not firing event on input[type=date]
 	- Currently no enforcement of shift length standards (by day or week)
 - Error handling - sketchy at best!
