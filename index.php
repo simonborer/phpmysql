@@ -15,8 +15,9 @@
 
         <!--   Title    -->
         <div class="grid-x">
-            <div class="cell small-12"><h1 class="h1 text-center">Schedule</h1></div>
+            <div class="cell small-12"><h1 class="h1 text-center">Schedule and Menu</h1></div>
         </div>
+		<!-- <h3><?php var_dump($sqlEmployees) ?></h3> -->
         <div class="grid-x">
             <div class="cell large-8 large-offset-0 medium-10 medium-offset-1">
                 <table class="schedule-table" id="scheduleTable">
@@ -239,7 +240,7 @@
                                     if($result = mysqli_query($link, $sqlLocations)){
                                         if(mysqli_num_rows($result) > 0){
                                             while($row = mysqli_fetch_array($result)){
-                                                echo "<option value='" . $row['location_id'] . "'>" . $row['address'] . "</option>";
+                                                echo "<option value='" . $row['store_id'] . "'>" . $row['store_address'] . "</option>";
                                             }
                                             // Free result set
                                             mysqli_free_result($result);
@@ -313,6 +314,49 @@
         </div>
     </div>
     </div>
+
+    <div class="grid-container">
+        <div class="cell large-8 large-offset-0 medium-10 medium-offset-1">
+            <table class="schedule-table" id="menu-table">
+                <thead>
+                    <tr>
+                        <th colspan="3">Menu</th>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    if($result = mysqli_query($link, $sqlBakeryMenu)){
+                        // Checks to see if the query returns any results
+                        if(mysqli_num_rows($result) > 0){
+                            // Loops for each row in the database table,
+                            // outputting the column data, wrapped in
+                            // html tags for the html table.
+                            while($row = mysqli_fetch_array($result)){
+                                echo "<tr>";
+                                echo "<td>" . $row['Item Name'] . "</td>";
+                                echo "<td>" . $row['Type'] . "</td>";
+                                echo "<td>$" . $row['Cost'] . "</td>";
+                                echo "</tr>";
+                            }
+                            // Free result set
+                            mysqli_free_result($result);
+                        } else{
+                            echo "<td colspan='3'>No records found</td>";
+                        }
+                    } else{
+                            echo "ERROR: Not able to execute $sql. " . mysqli_error($link);
+                    }             
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <?php
         // Close connection
         mysqli_close($link);
