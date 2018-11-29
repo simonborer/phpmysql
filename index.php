@@ -10,10 +10,11 @@
 
 <?php include("template__head.php"); ?>
 
-<body>
+<body class="dark">
     <div class="grid-container"> 
 
         <!--   Title    -->
+        <span id="darkButton"> Go Dark </span>
         <div class="grid-x">
             <div class="cell small-12"><h1 class="h1 text-center">Schedule</h1></div>
         </div>
@@ -200,7 +201,7 @@
                 
                     <div class="grid-x grid-padding-x">
 
-                        <div class="medium-12 cell">
+                        <div id="form" class="medium-12 cell">
                             <label>Employee
                                 <select name="employee" id="employeeDatalist" required>
                                     <!-- 

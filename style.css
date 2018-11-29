@@ -1,9 +1,48 @@
 /*  Base    */
 
+
 body {
     padding: 3rem 0;
     background: rgba(252, 237, 206, .25);
     color: #3c4151;
+    transition: 1s ease-in-out;
+
+}
+th {
+    transition: 1s ease-in-out;
+}
+
+th.dark {
+    color: #ffffff;
+    transition: 1s ease-in-out;
+    background-color: #281e23;
+}
+td.dark {
+    color: white;
+    transition: 1s ease-in-out;
+}
+td {
+    transition: 1s ease-in-out;
+}
+
+label {
+    transition: 1s ease-in-out;
+}
+
+label.dark {
+    color: #ff6600;
+    transition: 1s ease-in-out;
+}
+
+body.dark {
+    background: #090E3A;
+    color: #ff6600;
+    transition: 1s ease-in-out;
+
+}
+
+#darkButton {
+    cursor: pointer;
 }
 
 thead {
@@ -79,6 +118,14 @@ th[role=columnheader]:not(.no-sort):hover:after {
 }
 
 @media (min-width: 1080px) {
+    .grid-container {
+
+    }
+
+    {
+        color
+    }
+
     .schedule-table {
         margin: 0;
     }
