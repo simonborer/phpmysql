@@ -53,7 +53,9 @@
                             <th>End</th>
                             <th>Location</th>
                             <th>Role</th>
+							<th>Delete</th>
                         </tr>
+						
                     </thead>
                     <tbody>
                         <?php 
@@ -69,7 +71,9 @@
                                 // Loops for each row in the database table,
                                 // outputting the column data, wrapped in
                                 // html tags for the html table.
+								$shiftID="";
                                 while($row = mysqli_fetch_array($result)){
+									$shiftID=$row['shiftid'];
                                     echo "<tr>";
                                     echo "<td>" . $row['name'] . "</td>";
                                     echo "<td>" . $row['day'] . "</td>";
@@ -77,6 +81,7 @@
                                     echo "<td>" . $row['end'] . "</td>";
                                     echo "<td>" . $row['address'] . "</td>";
                                     echo "<td>" . $row['employee_type'] . "</td>";
+                                    echo "<td> <a onClick='deleteShift($shiftID)'>Delete</a></td>";
                                     echo "</tr>";
                                 }
                                 // Free result set
@@ -142,7 +147,7 @@
                     // 
                     // Note that we don't need to pass a primary_key
                     // if the key is set to autoincrement in our table
-                    $sql = "INSERT INTO bakery_shifts (employee_id, location_id, start_time, end_time) VALUES (?, ?, ?, ?)";
+                    $sql = "INSERT INTO shifts (employee_id, location_id, start_time, end_time) VALUES (?, ?, ?, ?)";
                      
                     if($stmt = mysqli_prepare($link, $sql)){
                         // Bind variables to the prepared statement as parameters
