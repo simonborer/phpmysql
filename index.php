@@ -110,96 +110,163 @@
             <?php 
                 // Define variables and initialize with empty values
                 $employee = $location = $day = $start_time = $end_time = "";
-                 
+                $employeeid = $location1 = $first_name = $last_name= $employee_type= "";
+                $input_formval = trim($_POST["formval"]);
+                $formval = $input_formval;
                 // Processing form data when form is submitted
-                if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-                    // $_POST["employee"] is the value of
-                    // the input element that has the 
-                    // attribute name="employee"
-                    $input_employee = trim($_POST["employee"]);
-                    $employee = $input_employee;
-
-                    // $_POST["location"] is the value of
-                    // the input element that has the 
-                    // attribute name="location"
-                    // and so on...
-                    $input_location = trim($_POST["location"]);
-                    $location = $input_location;
+                if($_SERVER["REQUEST_METHOD"] == "POST")
+                {
                     
-                    $input_day = trim($_POST["day"]);
-                    $day = $input_day;
+                    if($formval==1)
+                    {
+                        // $_POST["employee"] is the value of
+                        // the input element that has the 
+                        // attribute name="employee"
+                        $input_employee = trim($_POST["employee"]);
+                        $employee = $input_employee;
 
-                    $input_start_time = trim($_POST["start_time"]);
-                    $start_time = $input_start_time;
+                        // $_POST["location"] is the value of
+                        // the input element that has the 
+                        // attribute name="location"
+                        // and so on...
+                        $input_location = trim($_POST["location"]);
+                        $location = $input_location;
 
-                    $input_end_time = trim($_POST["end_time"]);
-                    $end_time = $input_end_time;
-                    
-                    // Prepare an insert statement
-                    // The question marks will be replaced
-                    // by the bind variables
-                    // 
-                    // Note that we don't need to pass a primary_key
-                    // if the key is set to autoincrement in our table
-                    $sql = "INSERT INTO bakery_shifts (employee_id, location_id, start_time, end_time) VALUES (?, ?, ?, ?)";
-                     
-                    if($stmt = mysqli_prepare($link, $sql)){
-                        // Bind variables to the prepared statement as parameters
-                        // "ssss" stands for the four strings
-                        // These are PHP data types, so we don't need
-                        // to worry about date datatypes
+                        $input_day = trim($_POST["day"]);
+                        $day = $input_day;
+
+                        $input_start_time = trim($_POST["start_time"]);
+                        $start_time = $input_start_time;
+
+                        $input_end_time = trim($_POST["end_time"]);
+                        $end_time = $input_end_time;
+
+                        // Prepare an insert statement
+                        // The question marks will be replaced
+                        // by the bind variables
                         // 
-                        // You can see a table of the four data types
-                        // accepted by mysqli_stmt_bind_param here:
-                        // http://php.net/manual/en/mysqli-stmt.bind-param.php
-                        mysqli_stmt_bind_param($stmt, "ssss", $param_employee, $param_location, $param_start_time, $param_end_time);
-                        
-                        // Set parameters - 
-                        // Note how we align the values from the 
-                        // 3 html inputs - 2 time and one date -
-                        // with the 2 database fields we need to populate
-                        // 
-                        // Date formatting and conversion is pretty brutal in PHP,
-                        // so it ended up being less work simply formatting
-                        // our input data as a string that's recognizable to MySQL.
-                        // The default HTML date and time inputs have similar formatting -
-                        // YYYY-MM-DD and a 24 hour clock. All we have to do here
-                        // is add a space between, and milliseconds to the time.
-                        // 
-                        // This is lucky, but it still took a good deal of var_dump()
-                        // to get right.
-                        $param_employee = $employee;
-                        $param_location = $location;
-                        $param_start_time = $day . ' ' .  $start_time . ':00';
-                        $param_end_time = $day . ' ' . $end_time . ':00';
-                        
-                        
-                        // Attempt to execute the prepared statement
-                        if(mysqli_stmt_execute($stmt)){
-                            // Records created successfully. 
-                            // Refreshing the page.
-                            // This could also be set to a "success" page
-                            header("location: index.php");
-                            exit();
-                        } else{
-                            echo "Something went wrong. Please try again later.";
+                        // Note that we don't need to pass a primary_key
+                        // if the key is set to autoincrement in our table
+                        $sql = "INSERT INTO bakery_shifts (employee_id, location_id, start_time, end_time) VALUES (?, ?, ?, ?)";
+
+                        if($stmt = mysqli_prepare($link, $sql))
+                        {
+                            // Bind variables to the prepared statement as parameters
+                            // "ssss" stands for the four strings
+                            // These are PHP data types, so we don't need
+                            // to worry about date datatypes
+                            // 
+                            // You can see a table of the four data types
+                            // accepted by mysqli_stmt_bind_param here:
+                            // http://php.net/manual/en/mysqli-stmt.bind-param.php
+                            mysqli_stmt_bind_param($stmt, "ssss", $param_employee, $param_location, $param_start_time, $param_end_time);
+
+                            // Set parameters - 
+                            // Note how we align the values from the 
+                            // 3 html inputs - 2 time and one date -
+                            // with the 2 database fields we need to populate
+                            // 
+                            // Date formatting and conversion is pretty brutal in PHP,
+                            // so it ended up being less work simply formatting
+                            // our input data as a string that's recognizable to MySQL.
+                            // The default HTML date and time inputs have similar formatting -
+                            // YYYY-MM-DD and a 24 hour clock. All we have to do here
+                            // is add a space between, and milliseconds to the time.
+                            // 
+                            // This is lucky, but it still took a good deal of var_dump()
+                            // to get right.
+                            $param_employee = $employee;
+                            $param_location = $location;
+                            $param_start_time = $day . ' ' .  $start_time . ':00';
+                            $param_end_time = $day . ' ' . $end_time . ':00';
+
+
+                            // Attempt to execute the prepared statement
+                            if(mysqli_stmt_execute($stmt))
+                            {
+                                // Records created successfully. 
+                                // Refreshing the page.
+                                // This could also be set to a "success" page
+                                header("location: index.php");
+                                exit();
+                            } 
+                            else
+                            {
+                                echo "Something went wrong. Please try again later.";
+                            }
+                            // Close statement
+                            mysqli_stmt_close($stmt);
                         }
                     }
-                     
-                    // Close statement
-                    mysqli_stmt_close($stmt);
-                }
+                    else if($formval==2)
+                    {
+                            $input_location = trim($_POST["location1"]);
+                            $location = $input_location;
+
+                            $input_$employeeid = (int)trim($_POST["employeeid"]);
+                            $employeeid = $input_$employeeid;
+
+                            $input_first_name = trim($_POST["first_name"]);
+                            $first_name = $input_first_name;
+
+
+                            $input_last_name = trim($_POST["last_name"]);
+                            $last_name = $input_last_name;
+
+                            $input_employee_type = trim($_POST["employee_type"]);
+                            $employee_type = $input_employee_type;
+
+
+                            $sql1 = "INSERT INTO bakery_employees (employee_id, default_loc, first_name, last_name,employee_type) VALUES (?, ?, ?, ?,?)";
+
+                            if($stmt1 = mysqli_prepare($link, $sql1))
+                            {
+
+                                mysqli_stmt_bind_param($stmt1, "issss",  $param_employee_id, $param_location,$param_first_name,  $param_last_name, $param_employee_type );
+
+                                $param_employee_id = $employeeid;
+                                $param_first_name = $first_name;
+                                $param_last_name = $last_name;
+                                $param_location = $location;
+                                $param_employee_type = $employee_type;
+
+
+                                // Attempt to execute the prepared statement
+                                if(mysqli_stmt_execute($stmt))
+                                {
+                                    header("location: index.php");
+                                    exit();
+                                } 
+                                else
+                                {
+                                    echo "Something went wrong. Please try again later.";
+                                }
+                             mysqli_stmt_close($stmt1);
+                            }    
+                        }
+                       
+                    }
+                         
+                
             ?>
+            
+            
+            
+          
+            
+            
             <!-- 
                 The submission form.
              -->
             <form class="schedule-form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                 <fieldset>
                     <legend>Add a shift</legend>
-                
+                    <label>form 1
+                        <input name="formval" type="hidden"   value="1" >
+                    </label>
                     <div class="grid-x grid-padding-x">
 
+                        
                         <div class="medium-12 cell">
                             <label>Employee
                                 <select name="employee" id="employeeDatalist" required>
@@ -255,6 +322,11 @@
                         </div>
                     </div>
 
+                    
+                    
+         
+                    
+                    
                     <!-- 
                     
                         Let's talk about validation for a moment.
@@ -311,8 +383,103 @@
                 </fieldset>
             </form>
         </div>
+<!--
     </div>
     </div>
+-->
+    
+    
+<!--    chalo-->
+    
+    
+    
+        <div class="cell large-3 large-offset-1 medium-10 medium-offset-1">
+      
+            
+           
+            
+            
+            
+          
+            
+            
+            <!-- 
+                The submission form.
+             -->
+            <form class="schedule-form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+                <fieldset>
+                    <legend>Add a Employee</legend>
+                    <label>form 2
+                        <input name="formval" type="hidden" value="2" >
+                    </label>
+                    <div class="grid-x grid-padding-x">
+
+                        <div class="medium-12 cell">
+                           
+                                <label>employee id
+                                  <input name="employeeid" type="text" required>
+                                </label>
+                            <label>first name
+                                  <input name="first_name" type="text" required>
+                                </label>
+                            <label>last name
+                                  <input name="last_name" type="text" required>
+                                </label>
+                            <label>employee type
+                                  <input name="employee_type" type="text" required>
+                                </label>
+                               
+                        </div>
+
+                        
+                        
+                        <div class="medium-12 cell">
+                            <label>Location
+                                <select name="location1" id="locationDatalist1" required>
+                                    <option value="" selected disabled hidden></option>
+                                    
+                                    <?php
+                             
+                                    if($result = mysqli_query($link, $sqlLocations)){
+                                        if(mysqli_num_rows($result) > 0){
+                                            while($row = mysqli_fetch_array($result)){
+                                                echo "<option value='" . $row['location_id'] . "'>" . $row['address'] . "</option>";
+                                            }
+                                            // Free result set
+                                            mysqli_free_result($result);
+                                        } else{
+                                            echo "<option value='No records were found'>";
+                                        }
+                                    } else{
+                                        echo "ERROR: Not able to execute $sql. " . mysqli_error($link);
+                                    }
+                                    ?>
+                                </select>
+                            </label>
+                        </div>
+                        
+                        
+                        
+                    </div>
+
+                    <div class="grid-x grid-padding-x">
+                        <div class="cell medium-12"><button class="button primary">Add Employee</button></div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    </div>
+    
+<!--    hatam-->
+    
+    
+            
+            
+    
+    
+    
     <?php
         // Close connection
         mysqli_close($link);
